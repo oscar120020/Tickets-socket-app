@@ -18,7 +18,7 @@ export const RouterApp = () => {
   return (
     <Router>
       <Layout style={{ height: "100vh" }}>
-        <Sider>
+        <Sider collapsedWidth="50" breakpoint="md">
           <div className="logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
             <Menu.Item key="1" icon={<UserOutlined />}>
