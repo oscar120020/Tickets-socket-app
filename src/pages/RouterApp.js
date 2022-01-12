@@ -11,7 +11,7 @@ import { GetIn } from "./GetIn";
 import { Cola } from "./Cola";
 import { Createticket } from "./Createticket";
 import { Desktop } from "./Desktop";
-import { UIContext, UIProvider } from "../context/UIContext";
+import { UIContext } from "../context/UIContext";
 
 const { Sider, Content } = Layout;
 
@@ -51,7 +51,6 @@ export const RouterApp = () => {
               <Route path="/cola" element={<Cola />} />
               <Route path="/crear-ticket" element={<Createticket />} />
               <Route path="*" element={<Navigate to="/ingresar" />} />
-
             </Routes>
           </Content>
         </Layout>

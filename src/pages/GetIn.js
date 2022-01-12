@@ -1,25 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Input, Button, InputNumber, Typography, Divider } from "antd";
 import { SaveOutlined } from "@ant-design/icons";
 import {useNavigate } from 'react-router-dom'
 import { useHideMenu } from "../hooks/useHideMenu";
+import { getUserStorage } from "../helpers/gerUserStorage";
 
 const { Title, Text } = Typography
 
 export const GetIn = () => {
 
    const navigate = useNavigate () 
-
    useHideMenu(false);
 
-  const onFinish = (values) => {
-    console.log("Success:", values);
+   const [usuario] = useState(getUserStorage())
+
+  const onFinish = ({agente, escritorio}) => {
+    localStorage.setItem("agente", agente)
+    localStorage.setItem("escritorio", escritorio)
     navigate("/escritorio")
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+  useEffect(() => {
+    if(usuario.agente && usuario.escritorio){
+      navigate("/escritorio")
+    }
+  }, [])
+
 
   return (
       <>

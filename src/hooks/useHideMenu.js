@@ -7,7 +7,6 @@ export const useHideMenu = (hide) => {
     useEffect(() => {
         if(hide){
             hiddeMenu()
-            console.log("oculto");
         }else{
             show()
         }
