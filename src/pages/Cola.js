@@ -1,6 +1,7 @@
 import { Button, Col, Divider, Row, Typography, List, Card, Tag } from "antd";
 import React, { useContext, useEffect, useState } from "react";
 import { SocketContext } from "../context/SocketContext";
+import { getLatestTickets } from "../helpers/getTickets";
 import { useHideMenu } from "../hooks/useHideMenu";
 
 const { Title, Text } = Typography;
@@ -16,6 +17,12 @@ export const Cola = () => {
       setTickets(tickets);
     })
   }, [socket])
+
+  useEffect(() => {
+    getLatestTickets().then(res => {
+      setTickets(res.latest)
+    })
+  }, [])
 
   return (
     <>

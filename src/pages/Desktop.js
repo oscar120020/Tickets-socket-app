@@ -14,12 +14,19 @@ export const Desktop = () => {
   const [usuario] = useState(getUserStorage());
   const { socket } = useContext(SocketContext);
   const [ticketData, setTicketData] = useState(null);
+  const [ticketsPendientes, setTicketsPendientes] = useState(0)
 
   useEffect(() => {
     if (!usuario.agente || !usuario.escritorio) {
       navigate("/ingresar");
     }
   }, []);
+
+  useEffect(() => {
+    socket.on("tickets-pendientes", (data) => {
+      setTicketsPendientes(data)
+    })
+  }, [socket])
 
   const salir = () => {
     localStorage.clear();
@@ -50,6 +57,8 @@ export const Desktop = () => {
           </Button>
         </Col>
       </Row>
+      <Divider></Divider>
+      <Text style={{fontSize: 20}}>Hay {ticketsPendientes} tickets pendientes</Text>
       <Divider></Divider>
       {ticketData ? (
         <Row>
