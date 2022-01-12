@@ -1,5 +1,5 @@
 import { Layout, Menu } from "antd";
-import React from "react";
+import React, { useContext } from "react";
 import {
   UserOutlined,
   VideoCameraOutlined,
@@ -11,14 +11,18 @@ import { GetIn } from "./GetIn";
 import { Cola } from "./Cola";
 import { Createticket } from "./Createticket";
 import { Desktop } from "./Desktop";
+import { UIContext, UIProvider } from "../context/UIContext";
 
 const { Sider, Content } = Layout;
 
 export const RouterApp = () => {
+
+  const { showMenu } = useContext(UIContext)
+
   return (
     <Router>
       <Layout style={{ height: "100vh" }}>
-        <Sider collapsedWidth="50" breakpoint="md">
+        <Sider hidden={!showMenu}  collapsedWidth="50" breakpoint="md">
           <div className="logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
             <Menu.Item key="1" icon={<UserOutlined />}>
