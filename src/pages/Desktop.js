@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react/cjs/react.development";
 import { getUserStorage } from "../helpers/gerUserStorage";
 import { SocketContext } from "../context/SocketContext";
+import { getTickets } from "../helpers/getTickets";
 
 const { Title, Text } = Typography;
 
@@ -21,6 +22,12 @@ export const Desktop = () => {
       navigate("/ingresar");
     }
   }, []);
+
+  useEffect(() => {
+    getTickets("pendientes").then(res => {
+      setTicketsPendientes(res.pendientes)
+    })
+  }, [])
 
   useEffect(() => {
     socket.on("tickets-pendientes", (data) => {
@@ -58,27 +65,21 @@ export const Desktop = () => {
         </Col>
       </Row>
       <Divider></Divider>
-      <Text style={{fontSize: 20}}>Hay {ticketsPendientes} tickets pendientes</Text>
+      <Text type={ticketsPendientes ? "success" : "danger"} style={{fontSize: 20}}>Hay {ticketsPendientes} tickets pendientes</Text>
       <Divider></Divider>
-      {ticketData ? (
+      {ticketData && (
         <Row>
           <Col>
-            <Text>Estó atendiendo el ticket número: </Text>
+            <Text>Está atendiendo el ticket número: </Text>
             <Text type="danger" style={{ fontSize: 20 }}>
               {ticketData.number}
             </Text>
           </Col>
         </Row>
-      ) : (
-        <Row>
-          <Col>
-            <Text style={{fontSize: 20}} type="danger">No hay tickets nuevos</Text>
-          </Col>
-        </Row>
       )}
       <Row>
         <Col offset={18} span={6} align="right">
-          <Button type="primary" shape="round" onClick={nextTicket}>
+          <Button disabled={!ticketsPendientes} type="primary" shape="round" onClick={nextTicket}>
             <RightOutlined />
             Siguiente
           </Button>
