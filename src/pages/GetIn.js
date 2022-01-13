@@ -37,8 +37,6 @@ export const GetIn = () => {
         <Divider></Divider>
         <Form
         name="basic"
-        labelCol={{ span: 4 }}
-        wrapperCol={{ span: 12 }}
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
@@ -47,6 +45,7 @@ export const GetIn = () => {
         <Form.Item
             label="Nombre del agente"
             name="agente"
+            wrapperCol={{ span: 12 }}
             rules={[{ required: true, message: "Por favor ingrese su nombre" }]}
         >
             <Input />
@@ -60,7 +59,7 @@ export const GetIn = () => {
             <InputNumber/>
         </Form.Item>
 
-        <Form.Item wrapperCol={{ offset: 4, span: 12 }}>
+        <Form.Item wrapperCol={{ offset: 0, span: 12 }}>
             <Button type="primary" htmlType="submit" shape="round">
                 <SaveOutlined/>
                 Ingresar

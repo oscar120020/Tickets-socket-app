@@ -3,9 +3,12 @@ import { useSocket } from "../hooks/useSocket";
 
 export const SocketContext = createContext()
 
+const baseUrl = process.env.REACT_APP_API_URL
+
 export const SocketProvider = ({children}) => {
 
-    const {socket, online} = useSocket("http://localhost:8080")
+    const {socket, online} = useSocket(`${baseUrl}`)
+    console.log(baseUrl);
 
     return (
         <SocketContext.Provider value={{socket, online}}>
